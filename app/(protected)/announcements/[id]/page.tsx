@@ -1,4 +1,3 @@
-// app/(protected)/announcements/[id]/page.tsx
 import { FC } from 'react';
 
 interface AnnouncementProps {
