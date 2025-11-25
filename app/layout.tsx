@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Figtree } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import Sidebar from "@/components/Sidebar";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -19,21 +20,27 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const figtreeSans = Figtree({
+  variable: "--font-figtree-sans",
+  // subsets: ["latin"],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
+      <body className={`${figtreeSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+            {children}
         </ThemeProvider>
       </body>
     </html>
