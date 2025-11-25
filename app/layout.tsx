@@ -22,7 +22,7 @@ const geistSans = Geist({
 
 const figtreeSans = Figtree({
   variable: "--font-figtree-sans",
-  // subsets: ["latin"],
+  subsets: ["latin"],
 });
 
 export default function RootLayout({
