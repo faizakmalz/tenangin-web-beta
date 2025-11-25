@@ -22,7 +22,7 @@ export default async function ProtectedLayout({ children }: { children: ReactNod
   if (!user) redirect("/auth/login");
 
   return (
-    <main className="min-h-screen flex w-screen overflow-hidden">
+    <main className={`min-h-screen flex w-screen overflow-hidden ${figtree.className}`}>
       <Sidebar />
       <div className="flex-1 pl-64 overflow-x-hidden bg-gray-50">{children}</div>
     </main>
