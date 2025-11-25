@@ -4,6 +4,13 @@ import { createClient } from "@/lib/supabase/server";
 import dynamic from "next/dynamic";
 import { ReactNode } from "react";
 import Sidebar from "@/components/Sidebar";
+import { Figtree } from 'next/font/google';
+
+const figtree = Figtree({
+  subsets: ['latin'], // Tentukan subset yang ingin digunakan
+  weight: '400', // Misalnya, menentukan berat font
+  style: 'normal', // Tentukan gaya font
+});
 
 
 export default async function ProtectedLayout({ children }: { children: ReactNode }) {
