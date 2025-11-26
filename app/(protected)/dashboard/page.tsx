@@ -13,6 +13,10 @@ export default async function DashboardPage() {
   .select("*, profiles(anon_name)")
   .order("created_at", { ascending: false });
 
+  if (data) {
+    console.log(data, 'asdhasohdaoihdaois')
+  }
+
   if (error) {
     console.error('Error fetching anggota:', error);
   }
