@@ -39,7 +39,7 @@ export default function ThreadList({
               onClick={() => onSelect(t)}
               className={`w-full text-left p-3 rounded-lg mb-2 relative ${
                 isActive 
-                  ? "bg-[#7D2A26] text-white" 
+                  ? "bg-purple-900 text-white" 
                   : "bg-white hover:bg-gray-100"
               }`}
             >

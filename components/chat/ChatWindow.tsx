@@ -46,7 +46,6 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
     };
   }, [thread?.id]);
 
-  // Auto-scroll when messages change
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -57,7 +56,6 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
     }, 100);
   }
 
-  /** Load initial messages */
   async function loadMessages(thread_id: string) {
     try {
       setLoading(true);
@@ -80,9 +78,7 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
     }
   }
 
-  /** Subscribe to realtime messages */
   function subscribeRealtime(thread_id: string) {
-    // Remove previous channel if exists
     if (channelRef.current) {
       supabase.removeChannel(channelRef.current);
     }
@@ -102,7 +98,6 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
           const newMessage = payload.new as Message;
           
           setMessages((prev) => {
-            // Prevent duplicates
             if (prev.some((m) => m.id === newMessage.id)) {
               return prev;
             }
@@ -117,14 +112,12 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
     channelRef.current = channel;
   }
 
-  /** Send message as admin */
   async function sendMessage() {
     if (!input.trim() || !thread) return;
 
     try {
       setSending(true);
 
-      // Get current admin user
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
@@ -134,7 +127,7 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
 
       const { error } = await supabase.from("chat_messages").insert({
         thread_id: thread.id,
-        sender_id: user.id, // Admin's user ID
+        sender_id: user.id, 
         sender_type: "admin",
         message: input.trim(),
       });
@@ -154,7 +147,6 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
     }
   }
 
-  /** Handle Enter key */
   function handleKeyPress(e: React.KeyboardEvent) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -162,7 +154,6 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
     }
   }
 
-  /** UI Render */
   if (!thread) {
     return (
       <div className="flex-1 flex items-center justify-center text-gray-500">
@@ -173,7 +164,6 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
 
   return (
     <div className="flex-1 flex flex-col">
-      {/* Header */}
       <div className="border-b p-4 bg-gray-50">
         <h3 className="font-semibold">Chat dengan User</h3>
         <p className="text-sm text-gray-500">
@@ -182,7 +172,6 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
         <p className="text-xs text-gray-400">Status: {thread.status}</p>
       </div>
 
-      {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
         {loading ? (
           <div className="flex justify-center items-center h-full">
@@ -203,7 +192,7 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
               <div
                 className={`px-4 py-2 rounded-lg max-w-[70%] break-words ${
                   msg.sender_type === "admin"
-                    ? "bg-[#7D2A26] text-white"
+                    ? "bg-purple-700 text-white"
                     : "bg-white text-black border"
                 }`}
               >
@@ -228,7 +217,6 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Input Bar */}
       <div className="border-t p-4 bg-white">
         <div className="flex gap-2">
           <textarea
@@ -243,7 +231,7 @@ export default function ChatWindow({ thread }: { thread: Thread | null }) {
           <button
             onClick={sendMessage}
             disabled={sending || !input.trim()}
-            className="px-6 py-2 bg-[#7D2A26] text-white rounded-lg hover:bg-[#651F1C] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="px-6 py-2 bg-purple-200 text-white rounded-lg hover:bg-purple-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {sending ? "Sending..." : "Kirim"}
           </button>
