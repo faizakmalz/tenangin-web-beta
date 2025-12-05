@@ -31,7 +31,7 @@ export function AnnouncementTable({ data }: { data: any[] }) {
   const table = useReactTable({ data, columns, getCoreRowModel: getCoreRowModel() });
 
   return (
-    <div className="bg-white rounded-lg overflow-x-auto border border-gray-200">
+    <div className="bg-white rounded-lg text-black overflow-x-auto border border-gray-200">
       <table className="min-w-full text-left">
         <thead className="bg-gray-50">
           {table.getHeaderGroups().map(hg => (
