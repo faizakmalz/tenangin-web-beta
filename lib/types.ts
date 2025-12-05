@@ -1,7 +1,9 @@
 
 type Session = {
   id: any;
-  anon_name: string;
+  profiles: {
+    anon_name: string;
+  };
   status: string;
   started_at: string;
   ended_at: string;

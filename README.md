@@ -13,7 +13,7 @@ Tenangin Admin Dashboard, uses to control all active users, reply on active user
     - In the web repo, update your `.env` with:
       ```
       VITE_SUPABASE_URL=your-project-url
-      VITE_SUPABASE_ANON_KEY=your-anon-key
+      VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-key
       # ...other Supabase settings as needed
       ```
 

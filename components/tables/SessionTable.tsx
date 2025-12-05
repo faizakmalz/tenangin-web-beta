@@ -18,7 +18,11 @@ export function SessionTable({ data }: { data: Session[] }) {
         <span className="font-medium text-gray-700">{getValue() as any}</span>
       ),
     },
-    { accessorKey: "anon_name", header: "Nama Pengguna" },
+    { accessorKey: "anon_name", header: "Nama Pengguna",
+      cell: ({row}) => (
+          <span className="font-medium text-gray-700">{row.original.profiles?.anon_name}</span>
+      )
+    },
     {
       accessorKey: "status",
       header: "Status",
